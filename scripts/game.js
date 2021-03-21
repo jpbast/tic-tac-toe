@@ -1,10 +1,15 @@
 function engine(control) {
-    if (checkVerticalAndHorizontal(control) || checkDiag(control)) {
-        setTimeout(() => {
-            alert(`Jogador ${control} venceu a partida!`)
-        }, 10)
+    if (checkVerticalAndHorizontal(control) || checkDiag(control) || checkTie()) {
+        if (checkTie())
+            setTimeout(() => {
+                alert(`Match tied, no winner this time!`)
+            }, 10) 
+        else
+            setTimeout(() => {
+                alert(`Player ${control} won the match!`)
+            }, 10)
         endGame()
-    }       
+    }
 }
 
 function endGame() {
@@ -20,7 +25,6 @@ function restartGame() {
             sqr.control = -1
         })
     }  
-    console.log(square)
     square = []
     player = 1
     count = 1;
@@ -59,4 +63,15 @@ function checkDiag(control) {
     }
 
     return (countMain == SIZE || countSec == SIZE) ? true : false
+}
+
+function checkTie() {
+    let countTie = 0;
+    for (let i = 0; i < SIZE; i++) {
+        square[i].forEach(square => {
+            if (square.control == -1)
+                countTie++
+        })
+    }
+    return countTie == 0 ? true : false 
 }

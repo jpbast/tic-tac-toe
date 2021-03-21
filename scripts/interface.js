@@ -18,14 +18,12 @@ function startGame() {
 }
 
 let restart = document.getElementById("restart")
-console.log(restart)
 restart.addEventListener("click", restartGame)
 
 function game() {
    
     if (this.control == -1) {
         this.control = player
-        console.log(this.control)
         if (player == 1) 
             addShield(this)
         else 
